@@ -1,12 +1,12 @@
 extends Node2D
 class_name Weapon
 
-enum STATES {READY, FIRING, RELOADING}
+enum STATES {READY, FIRING, RELOADING, COOLDOWN}
 
 #@export var BULLET_SCENE : PackedScene
 @onready var BULLET_SCENE = load("res://scene/bullet.tscn") as PackedScene
 @onready var PLAYER_SCENE = load("res://scene/player.tscn") as PackedScene
-@onready var reload_timer: Timer = $Timer
+@onready var cooldown_timer: Timer = $Timer
 
 var state : STATES = STATES.READY 
 var player: Node = null
@@ -17,9 +17,13 @@ func _ready() -> void:
 	
 func change_state(new_state: STATES):
 	state = new_state
+	cooldown_timer.start()
 	
 func fire():
-	if state == STATES.FIRING || state == STATES.RELOADING :
+	if player.PLAYER_WALK :
+		return
+		
+	if state == STATES.FIRING || state == STATES.RELOADING || state == STATES.COOLDOWN:
 		return
 		
 	change_state(STATES.FIRING)
@@ -41,14 +45,16 @@ func fire():
 	else:
 		print("BULLET_SCENE is null! Please set it in the editor.")
 		
-	change_state(STATES.RELOADING)
-	reload_timer.start()
+	change_state(STATES.COOLDOWN)
 	
 
 func enemy_fire():
 	pass
 	
-func _on_reload_timer_timeout():
-	var animation_player = player.get_node('AnimatedSprite2D')
-	#animation_player.play("reload")
+func _on_timer_timeout():
 	change_state(STATES.READY)
+	
+#func _on_reload_timer_timeout():
+	#var animation_player = player.get_node('AnimatedSprite2D')
+	##animation_player.play("reload")
+	#change_state(STATES.READY)

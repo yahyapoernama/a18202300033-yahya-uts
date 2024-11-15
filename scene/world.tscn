@@ -27,6 +27,22 @@ scale = Vector2(1.88, 1.88)
 wait_time = 10.0
 autostart = true
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HPLabel" type="Label" parent="CanvasLayer"]
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 55.0
+offset_bottom = 38.0
+text = "HP :"
+
+[node name="HP" type="Label" parent="CanvasLayer/HPLabel"]
+layout_mode = 0
+offset_left = 35.0
+offset_right = 75.0
+offset_bottom = 23.0
+text = "0"
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground"]

@@ -45,6 +45,7 @@ func _process(delta: float) -> void:
 		# Perbarui posisi musuh
 		#print((direction_to_player*speed*delta).x)
 		#global_position += Vector2(direction_to_player * speed * delta)
+		#print(len(get_tree().get_nodes_in_group('enemy-body')))
 		if player_pos.position.x > position.x :
 			if (player_pos.position.x-position.x) < 50 :
 				animation_player.play("attack")
