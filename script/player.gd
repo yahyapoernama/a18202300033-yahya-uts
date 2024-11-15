@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+enum PLAYER_DIRECTION {LEFT, RIGHT}
+
 const SPEED = 64.0
 const TURN_SPEED = 2
 const ROTATE_SPEED = 20
@@ -8,11 +10,15 @@ var HEALTH:int = 5
 var HEALTH_NOW:int = HEALTH
 
 var direction := Vector2.RIGHT
+var player_direction : PLAYER_DIRECTION = PLAYER_DIRECTION.LEFT
 
+func change_direction(new_direction: PLAYER_DIRECTION):
+	player_direction = new_direction
+
+@onready var weapon: Weapon = $Weapon as Weapon
 @onready var animation_player: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
-	print('player')
 	animation_player.play("idle")
 	
 #func _physics_process(delta: float):
@@ -34,12 +40,14 @@ func _physics_process(delta: float):
 	if input_direction.x != 0:
 		if Input.is_action_pressed("turn_left"):
 			animation_player.flip_h = input_direction.x < 0  # Membalik sprite jika bergerak ke kiri
+			change_direction(PLAYER_DIRECTION.LEFT)
 			position.x -= 5
 			animation_player.play("walk")	
 		if Input.is_action_pressed("turn_right"):
 			animation_player.flip_h = input_direction.x < 0
+			change_direction(PLAYER_DIRECTION.RIGHT)
 			position.x += 5
-			animation_player.play("walk")	
+			animation_player.play("walk")
 		velocity = direction.normalized() * (input_direction.x + 100) * current_speed
 	else :
 		velocity = Vector2.ZERO
@@ -57,3 +65,7 @@ func _physics_process(delta: float):
 	position.y = clamp(position.y, viewport_rect.position.y, viewport_rect.position.y + viewport_rect.size.y)
 	
 	move_and_slide()
+
+func _input(event):
+	if event.is_action_pressed("shoot"):
+		weapon.fire()

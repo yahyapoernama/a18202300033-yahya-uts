@@ -24,7 +24,7 @@ position = Vector2(-500, 215)
 scale = Vector2(1.88, 1.88)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 10.0
 autostart = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -33,3 +33,5 @@ autostart = true
 position = Vector2(584, 188)
 scale = Vector2(1.33621, 1.21248)
 texture = ExtResource("1_dssaa")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
