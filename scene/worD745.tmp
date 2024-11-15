@@ -37,22 +37,20 @@ offset_right = 55.0
 offset_bottom = 38.0
 text = "HP :"
 
-[node name="HP" type="ProgressBar" parent="CanvasLayer/Health"]
-offset_left = 35.0
-offset_right = 175.0
-offset_bottom = 27.0
-max_value = 5.0
-step = 1.0
-rounded = true
-script = ExtResource("3_h32g1")
-
-[node name="HP2" type="Label" parent="CanvasLayer/Health"]
+[node name="HP3" type="ProgressBar" parent="CanvasLayer/Health"]
 visible = false
 layout_mode = 0
 offset_left = 35.0
-offset_right = 75.0
+offset_right = 175.0
+offset_bottom = 27.0
+step = 1.0
+script = ExtResource("3_h32g1")
+
+[node name="HP" type="Label" parent="CanvasLayer/Health"]
+layout_mode = 0
+offset_right = 40.0
 offset_bottom = 23.0
-text = "0"
+script = ExtResource("3_h32g1")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

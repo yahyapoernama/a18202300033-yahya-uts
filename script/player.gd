@@ -8,7 +8,7 @@ const SPEED = 64.0
 const TURN_SPEED = 2
 const ROTATE_SPEED = 20
 const NITRO_SPEED = 130
-var HEALTH:int = 5
+var HEALTH:int = 50
 var HEALTH_NOW:int = HEALTH
 
 signal health_signal(health:int, healthnow:int)
@@ -23,21 +23,9 @@ func change_direction(new_direction: PLAYER_DIRECTION):
 @onready var weapon: Weapon = $Weapon as Weapon
 @onready var animation_player: AnimatedSprite2D = $AnimatedSprite2D
 
-func _ready() -> void:
+func _ready():
 	emit_signal("health_signal", HEALTH , HEALTH_NOW)
-	print(get_tree().get_nodes_in_group('Weapon'))
-	#weapon = get_tree().get_node("Weapon")
 	animation_player.play("idle")
-	
-#func _physics_process(delta: float):
-	#var velocity = Vector2.ZERO  # Inisialisasi kecepatan
-	## Cek input arah kiri dan kanan
-	#if Input.is_action_pressed("ui_left"):
-		#velocity.x -= SPEED  # Bergerak ke kiri
-	#elif Input.is_action_pressed("ui_right"):
-		#velocity.x += SPEED  # Bergerak ke kanan
-#
-	#move_and_slide()
 	
 func _physics_process(delta: float):
 	# Dapatkan batas layar (Rect2) dalam koordinat global
@@ -86,3 +74,7 @@ func _physics_process(delta: float):
 func _input(event):
 	if event.is_action_pressed("shoot"):
 		weapon.fire()
+
+
+func _on_player_health_signal(health: int, healthnow: int) -> void:
+	pass # Replace with function body.

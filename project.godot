@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 project/assembly_name="A18202300033 Yahya UTS"
 
+[global_group]
+
+player=""
+
 [input]
 
 turn_left={

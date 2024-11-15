@@ -270,10 +270,12 @@ script = ExtResource("1_tgypj")
 position = Vector2(0, -30)
 sprite_frames = SubResource("SpriteFrames_133jb")
 animation = &"shoot"
-frame_progress = 0.127023
+frame_progress = 0.620432
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_66oa4")
 
 [node name="Weapon" parent="." instance=ExtResource("7_rmudg")]
+
+[connection signal="health_signal" from="." to="." method="_on_health_signal"]

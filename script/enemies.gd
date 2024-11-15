@@ -2,7 +2,7 @@ extends Area2D
 
 @export var speed = 2
 @onready var animation_player: AnimatedSprite2D = $AnimatedSprite2D
-@onready var sprite := $Sprite2D
+#@onready var sprite := $Sprite2D
 @onready var player_pos = get_tree().get_root().get_node("MainScene/Player")
 #@onready var direction_change_timer: Timer = $Timer2
 
@@ -77,16 +77,16 @@ func set_random_direction():
 #func _on_timer_timeout() -> void:
 	#fire()
 
-func _on_area_entered(area: Area2D) -> void:
-	if area.is_in_group('tank-bullet'):
-		print("damage", area.DAMAGE)
-		HEALTH_NOW -= area.DAMAGE
-		area.queue_free()
-
-	if HEALTH_NOW <= 0:
-		emit_signal("enemy_death", POINT)
-		queue_free()
-		
+#func _on_area_entered(area: Area2D) -> void:
+	#if area.is_in_group('tank-bullet'):
+		#print("damage", area.DAMAGE)
+		#HEALTH_NOW -= area.DAMAGE
+		#area.queue_free()
+#
+	#if HEALTH_NOW <= 0:
+		#emit_signal("enemy_death", POINT)
+		#queue_free()
+		#
 
 func _on_timer_2_timeout() -> void:
 	set_random_direction()
