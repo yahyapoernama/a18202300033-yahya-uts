@@ -80,7 +80,7 @@ func set_random_direction():
 	#fire()
 
 func _on_area_entered(area: Area2D) -> void:
-	if area.is_in_group('bullet'):
+	if area.is_in_group('player-bullet'):
 		#print("damage", area.DAMAGE)
 		HEALTH_NOW -= area.DAMAGE
 		area.queue_free()
@@ -91,6 +91,3 @@ func _on_area_entered(area: Area2D) -> void:
 		await animation_player.animation_finished
 		queue_free()
 		
-
-func _on_timer_2_timeout() -> void:
-	set_random_direction()

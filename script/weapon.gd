@@ -28,7 +28,6 @@ func fire():
 		
 	change_state(STATES.FIRING)
 	if BULLET_SCENE:
-		print('bulletscene')
 		var bullet = BULLET_SCENE.instantiate()
 		#bullet.direction = Vector2.from_angle(global_rotation)
 		#print(player.PLAYER_DIRECTION == player.PLAYER_DIRECTION.LEFT)
@@ -38,7 +37,7 @@ func fire():
 		else:
 			bullet.direction = Vector2(1, 0)
 			bullet.global_position = global_position + Vector2(50, -20)
-		bullet.add_to_group('bullet')
+		bullet.add_to_group('player-bullet')
 		move_to_front()
 		get_tree().root.add_child(bullet)
 		
