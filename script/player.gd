@@ -54,10 +54,9 @@ func _physics_process(delta: float):
 			PLAYER_SHOOT = false
 		if Input.is_action_just_pressed("reload"):
 			animation_player.play("reload")
-			await get_tree().create_timer(0.5).timeout
+			await animation_player.animation_finished
 			animation_player.play("idle")
 		if Input.is_action_just_pressed("shoot"):
-			print("ok")
 			await get_tree().create_timer(1).timeout
 		if Input.is_action_pressed("shoot"):
 			animation_player.play("shoot")

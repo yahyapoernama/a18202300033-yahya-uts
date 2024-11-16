@@ -148,7 +148,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_f0dbt")
 }],
-"loop": true,
+"loop": false,
 "name": &"dead",
 "speed": 5.0
 }, {
@@ -221,9 +221,13 @@ script = ExtResource("1_3fvid")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -13.505)
 sprite_frames = SubResource("SpriteFrames_h5xql")
-animation = &"walk"
+animation = &"dead"
+frame = 4
+frame_progress = 1.0
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_ifp1w")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

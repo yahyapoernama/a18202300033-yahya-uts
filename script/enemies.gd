@@ -2,7 +2,7 @@ extends Area2D
 
 @export var speed = 2
 @onready var animation_player: AnimatedSprite2D = $AnimatedSprite2D
-#@onready var sprite := $Sprite2D
+@onready var sprite := $AnimatedSprite2D
 @onready var player_pos = get_tree().get_root().get_node("MainScene/Player")
 #@onready var direction_change_timer: Timer = $Timer2
 
@@ -38,16 +38,18 @@ func set_direction_to_center():
 	
 func _process(delta: float) -> void:
 	#animation_player.play("walk")
+	if HEALTH_NOW <= 0:
+		return
 	if player_pos:
 		# Hitung arah ke pemain
 		var direction_to_player = (player_pos.global_position - global_position).normalized()
-		
+		var distance_to_attack = 75
 		# Perbarui posisi musuh
 		#print((direction_to_player*speed*delta).x)
 		#global_position += Vector2(direction_to_player * speed * delta)
 		#print(len(get_tree().get_nodes_in_group('enemy-body')))
 		if player_pos.position.x > position.x :
-			if (player_pos.position.x-position.x) < 50 :
+			if (player_pos.position.x-position.x) < distance_to_attack :
 				animation_player.play("attack")
 				await get_tree().create_timer(3).timeout
 			else :
@@ -55,7 +57,7 @@ func _process(delta: float) -> void:
 				animation_player.play("walk")
 				position.x += speed/2
 		elif player_pos.position.x < position.x :
-			if (position.x-player_pos.position.x) < 50 :
+			if (position.x-player_pos.position.x) < distance_to_attack :
 				animation_player.play("attack")
 				await get_tree().create_timer(3).timeout
 			else :
@@ -77,16 +79,18 @@ func set_random_direction():
 #func _on_timer_timeout() -> void:
 	#fire()
 
-#func _on_area_entered(area: Area2D) -> void:
-	#if area.is_in_group('tank-bullet'):
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group('bullet'):
 		#print("damage", area.DAMAGE)
-		#HEALTH_NOW -= area.DAMAGE
-		#area.queue_free()
-#
-	#if HEALTH_NOW <= 0:
-		#emit_signal("enemy_death", POINT)
-		#queue_free()
-		#
+		HEALTH_NOW -= area.DAMAGE
+		area.queue_free()
+
+	if HEALTH_NOW <= 0:
+		emit_signal("enemy_death", POINT)
+		animation_player.play("dead")
+		await animation_player.animation_finished
+		queue_free()
+		
 
 func _on_timer_2_timeout() -> void:
 	set_random_direction()

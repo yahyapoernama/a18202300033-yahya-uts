@@ -151,7 +151,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ohk4k")
 }],
-"loop": true,
+"loop": false,
 "name": &"dead",
 "speed": 10.0
 }, {
@@ -209,7 +209,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4lsr1")
 }],
-"loop": true,
+"loop": false,
 "name": &"reload",
 "speed": 10.0
 }, {
@@ -269,8 +269,7 @@ script = ExtResource("1_tgypj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -30)
 sprite_frames = SubResource("SpriteFrames_133jb")
-animation = &"shoot"
-frame_progress = 0.620432
+animation = &"reload"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 1)
