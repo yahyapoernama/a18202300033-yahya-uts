@@ -277,4 +277,12 @@ shape = SubResource("CapsuleShape2D_66oa4")
 
 [node name="Weapon" parent="." instance=ExtResource("7_rmudg")]
 
+[node name="Shoot" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Reload" type="Timer" parent="."]
+wait_time = 0.5
+
 [connection signal="health_signal" from="." to="." method="_on_health_signal"]
+[connection signal="timeout" from="Shoot" to="." method="_on_shoot_timeout"]
+[connection signal="timeout" from="Reload" to="." method="_on_reload_timeout"]

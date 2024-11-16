@@ -3,8 +3,11 @@ extends Node2D
 var ENEMY = preload("res://scene/enemy.tscn")
 var is_first_loop = true
 
+signal ammo_signal
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	emit_signal("ammo_signal")
 	spawnEnemy()
 	pass # Replace with function body.
 

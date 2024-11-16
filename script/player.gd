@@ -10,9 +10,12 @@ const ROTATE_SPEED = 20
 const NITRO_SPEED = 130
 var HEALTH:int = 50
 var HEALTH_NOW:int = HEALTH
+var ammo:Node
 
 signal health_signal(health:int, healthnow:int)
 signal death_signal(isTrue:bool)
+signal ammo_signal
+signal reload_signal
 
 var direction := Vector2.RIGHT
 var player_direction : PLAYER_DIRECTION = PLAYER_DIRECTION.LEFT
@@ -27,6 +30,7 @@ func _ready():
 	emit_signal("health_signal", HEALTH, HEALTH_NOW)
 	change_direction(PLAYER_DIRECTION.RIGHT)
 	animation_player.play("idle")
+	ammo = get_tree().get_root().get_node("MainScene/CanvasLayer/AmmoLabel/Ammo")
 	
 func _physics_process(delta: float):
 	# Dapatkan batas layar (Rect2) dalam koordinat global
@@ -48,21 +52,29 @@ func _physics_process(delta: float):
 			animation_player.play("walk")
 			PLAYER_WALK = true
 		velocity = direction.normalized() * (input_direction.x + 100) * current_speed
+		$Reload.stop()
 	else :
 		velocity = Vector2.ZERO
 		if ["turn_left", "turn_right", "shoot"].any(Input.is_action_just_released):
 			animation_player.play("idle")
 			PLAYER_SHOOT = false
+			$Shoot.stop()
 		if Input.is_action_just_pressed("reload"):
 			animation_player.play("reload")
-			await animation_player.animation_finished
-			animation_player.play("idle")
+			$Reload.start()
 		if Input.is_action_just_pressed("shoot"):
-			await get_tree().create_timer(1).timeout
+			$Shoot.start()
+			if ammo.AMMO_NOW > 0:
+				emit_signal("ammo_signal")
 		if Input.is_action_pressed("shoot"):
-			animation_player.play("shoot")
-			PLAYER_SHOOT = true
-			weapon.fire()
+			if ammo.AMMO_NOW > 0:
+				animation_player.play("shoot")
+				#await get_tree().create_timer(1).timeout
+				PLAYER_SHOOT = true
+				weapon.fire()
+			else:
+				animation_player.play("idle")
+				PLAYER_SHOOT = false
 		PLAYER_WALK = false
 	
 	# Batasi posisi player agar tetap di dalam layar
@@ -74,3 +86,15 @@ func _physics_process(delta: float):
 func _input(event):
 	if event.is_action_pressed("shoot"):
 		weapon.fire()
+
+func _on_shoot_timeout() -> void:
+	if ammo.AMMO_NOW > 0:
+		emit_signal("ammo_signal")
+	pass # Replace with function body.
+
+func _on_reload_timeout() -> void:
+	emit_signal("reload_signal")
+	$Reload.stop()
+	await animation_player.animation_finished
+	animation_player.play("idle")
+	pass # Replace with function body.

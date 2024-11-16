@@ -7,7 +7,7 @@ extends Area2D
 @onready var player_pos = get_tree().get_root().get_node("MainScene/Player")
 
 const SPEED = 34.0
-var HEALTH:int = 2
+var HEALTH:int = 3
 var HEALTH_NOW:int = HEALTH
 const POINT = 1 
 const DAMAGE = 1
@@ -17,7 +17,7 @@ signal enemy_death
 var direction: Vector2 = Vector2.ZERO
 var initial_movement: bool = true
 
-func _ready() -> void:	
+func _ready() -> void:
 	animation_enemy.play("walk")
 	set_direction_to_center()
 
@@ -65,5 +65,3 @@ func _on_area_entered(area: Area2D) -> void:
 		emit_signal("enemy_death", POINT)
 		await animation_enemy.animation_finished
 		queue_free()
-		
-	print(HEALTH_NOW)

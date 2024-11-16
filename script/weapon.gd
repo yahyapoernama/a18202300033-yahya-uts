@@ -7,11 +7,13 @@ enum STATES {READY, FIRING, RELOADING, COOLDOWN}
 @onready var PLAYER_SCENE = load("res://scene/player.tscn") as PackedScene
 @onready var cooldown_timer: Timer = $Timer
 
-var state : STATES = STATES.READY 
-var player: Node = null
+var state:STATES = STATES.READY 
+var player:Node
+var ammo:Node
 
 func _ready() -> void:
-	player = get_tree().get_root().get_node("MainScene/Player")  # Sesuaikan path ke player
+	player = get_tree().get_root().get_node("MainScene/Player")
+	ammo = get_tree().get_root().get_node("MainScene/CanvasLayer/AmmoLabel/Ammo")
 	pass # Replace with function body.
 	
 func change_state(new_state: STATES):
@@ -20,6 +22,9 @@ func change_state(new_state: STATES):
 	
 func fire():
 	if player.PLAYER_WALK :
+		return
+		
+	if ammo.AMMO_NOW <= 0:
 		return
 		
 	if state == STATES.FIRING || state == STATES.RELOADING || state == STATES.COOLDOWN:
@@ -40,8 +45,6 @@ func fire():
 		
 	else:
 		print("BULLET_SCENE is null! Please set it in the editor.")
-		
-	change_state(STATES.COOLDOWN)
 	
 
 func enemy_fire():
