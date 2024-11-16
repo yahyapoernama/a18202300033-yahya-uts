@@ -1,6 +1,6 @@
 extends Node2D
 
-var ENEMY = preload("res://scene/enemies.tscn")
+var ENEMY = preload("res://scene/enemy.tscn")
 var is_first_loop = true
 
 # Called when the node enters the scene tree for the first time.
@@ -13,7 +13,6 @@ func _process(delta: float) -> void:
 	pass
 
 func spawnEnemy():
-	print('spawn enemy')
 	var enemy = ENEMY.instantiate()
 	enemy.scale = Vector2(1.88, 1.88)
 	enemy.add_to_group('enemy-body')

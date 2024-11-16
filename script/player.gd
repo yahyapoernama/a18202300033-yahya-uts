@@ -25,6 +25,7 @@ func change_direction(new_direction: PLAYER_DIRECTION):
 
 func _ready():
 	emit_signal("health_signal", HEALTH, HEALTH_NOW)
+	change_direction(PLAYER_DIRECTION.RIGHT)
 	animation_player.play("idle")
 	
 func _physics_process(delta: float):
