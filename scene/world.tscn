@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cb72eo6na7jji"]
+[gd_scene load_steps=7 format=3 uid="uid://cb72eo6na7jji"]
 
 [ext_resource type="Script" path="res://script/world.gd" id="1_cmxk4"]
 [ext_resource type="Texture2D" uid="uid://cjxsqx80v5xsm" path="res://art/background/Background.png" id="1_dssaa"]
@@ -7,6 +7,13 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bpoge"]
 size = Vector2(171.77, 149.769)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e78rp"]
+bg_color = Color(0, 0.711377, 0.462383, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="MainScene" type="Node2D"]
 position = Vector2(566, 313)
@@ -38,21 +45,16 @@ offset_bottom = 38.0
 text = "HP :"
 
 [node name="HP" type="ProgressBar" parent="CanvasLayer/Health"]
+layout_mode = 0
 offset_left = 35.0
 offset_right = 175.0
 offset_bottom = 27.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_e78rp")
 max_value = 5.0
 step = 1.0
+value = 5.0
 rounded = true
 script = ExtResource("3_h32g1")
-
-[node name="HP2" type="Label" parent="CanvasLayer/Health"]
-visible = false
-layout_mode = 0
-offset_left = 35.0
-offset_right = 75.0
-offset_bottom = 23.0
-text = "0"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -61,4 +63,5 @@ position = Vector2(584, 188)
 scale = Vector2(1.33621, 1.21248)
 texture = ExtResource("1_dssaa")
 
+[connection signal="health_signal" from="Player" to="CanvasLayer/Health/HP" method="_on_player_health_signal"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

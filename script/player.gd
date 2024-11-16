@@ -24,7 +24,7 @@ func change_direction(new_direction: PLAYER_DIRECTION):
 @onready var animation_player: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready():
-	emit_signal("health_signal", HEALTH , HEALTH_NOW)
+	emit_signal("health_signal", HEALTH, HEALTH_NOW)
 	animation_player.play("idle")
 	
 func _physics_process(delta: float):
@@ -74,7 +74,3 @@ func _physics_process(delta: float):
 func _input(event):
 	if event.is_action_pressed("shoot"):
 		weapon.fire()
-
-
-func _on_player_health_signal(health: int, healthnow: int) -> void:
-	pass # Replace with function body.
