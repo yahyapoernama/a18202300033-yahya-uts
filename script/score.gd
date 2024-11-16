@@ -8,10 +8,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-#func _on_tank_death_signal(isTrue: bool) -> void:
-	#if POINT > SCORE.score:
-		#SCORE.score = POINT
-
 func add_point(point:Variant)->void:
 	POINT += point
 	text = str(POINT)

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://script/world.gd" id="1_cmxk4"]
 [ext_resource type="Texture2D" uid="uid://cjxsqx80v5xsm" path="res://art/background/Background.png" id="1_dssaa"]
 [ext_resource type="PackedScene" uid="uid://clursx5m5ve55" path="res://scene/player.tscn" id="1_pc2u1"]
-[ext_resource type="Script" path="res://script/hp.gd" id="3_h32g1"]
+[ext_resource type="Script" path="res://script/health.gd" id="3_h32g1"]
 [ext_resource type="Script" path="res://script/score.gd" id="4_dwcs7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bpoge"]

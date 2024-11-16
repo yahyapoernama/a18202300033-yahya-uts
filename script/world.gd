@@ -16,7 +16,6 @@ func spawnEnemy():
 	print('spawn enemy')
 	var enemy = ENEMY.instantiate()
 	enemy.scale = Vector2(1.88, 1.88)
-	#enemy.flip_h = !enemy.flip_h
 	enemy.add_to_group('enemy-body')
 
 	# Mendapatkan ukuran viewport

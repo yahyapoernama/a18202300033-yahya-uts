@@ -73,12 +73,6 @@ func set_random_direction():
 	var angle = randf() * TAU
 	direction = Vector2(cos(angle), sin(angle)).normalized()  
 
-#func fire():
-	#weapon.fire()
-
-#func _on_timer_timeout() -> void:
-	#fire()
-
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group('player-bullet'):
 		#print("damage", area.DAMAGE)

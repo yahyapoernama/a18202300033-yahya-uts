@@ -3,7 +3,6 @@ class_name Weapon
 
 enum STATES {READY, FIRING, RELOADING, COOLDOWN}
 
-#@export var BULLET_SCENE : PackedScene
 @onready var BULLET_SCENE = load("res://scene/bullet.tscn") as PackedScene
 @onready var PLAYER_SCENE = load("res://scene/player.tscn") as PackedScene
 @onready var cooldown_timer: Timer = $Timer
@@ -29,8 +28,6 @@ func fire():
 	change_state(STATES.FIRING)
 	if BULLET_SCENE:
 		var bullet = BULLET_SCENE.instantiate()
-		#bullet.direction = Vector2.from_angle(global_rotation)
-		#print(player.PLAYER_DIRECTION == player.PLAYER_DIRECTION.LEFT)
 		if player.player_direction == player.PLAYER_DIRECTION.LEFT:
 			bullet.direction = Vector2(-1, 0)
 			bullet.global_position = global_position + Vector2(-50, -20)
@@ -52,8 +49,3 @@ func enemy_fire():
 	
 func _on_timer_timeout():
 	change_state(STATES.READY)
-	
-#func _on_reload_timer_timeout():
-	#var animation_player = player.get_node('AnimatedSprite2D')
-	##animation_player.play("reload")
-	#change_state(STATES.READY)
