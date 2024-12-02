@@ -21,7 +21,7 @@ func change_state(new_state: STATES):
 	cooldown_timer.start()
 	
 func fire():
-	if player.PLAYER_WALK :
+	if player.PLAYER_WALK || player.PLAYER_DEAD :
 		return
 		
 	if ammo.AMMO_NOW <= 0:

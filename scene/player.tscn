@@ -269,7 +269,9 @@ script = ExtResource("1_tgypj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -30)
 sprite_frames = SubResource("SpriteFrames_133jb")
-animation = &"shoot"
+animation = &"dead"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 1)
@@ -283,6 +285,5 @@ wait_time = 0.5
 [node name="Reload" type="Timer" parent="."]
 wait_time = 0.5
 
-[connection signal="health_signal" from="." to="." method="_on_health_signal"]
 [connection signal="timeout" from="Shoot" to="." method="_on_shoot_timeout"]
 [connection signal="timeout" from="Reload" to="." method="_on_reload_timeout"]
